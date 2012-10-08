@@ -22,13 +22,13 @@ class Packages:
     def list(self, uid = None, system = True):
         sql = "SELECT * FROM packages"
         if all ([system, uid]):
-            sql.append(' WHERE owner = 0 OR owner = ' + uid)
+            sql += ' WHERE owner = 0 OR owner = ' + uid
         else:
             if system:
-                sql.append(' WHERE owner = 0')
+                sql += ' WHERE owner = 0'
             if uid:
-                sql.append(' WHERE owner = ' + uid)
+                sql += ' WHERE owner = ' + uid
 
-        rows = self.db.prepare("SELECT * FROM packages")
+        rows = self.db.prepare(sql)
         for row in rows():
             print(row)
