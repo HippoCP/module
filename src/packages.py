@@ -12,7 +12,7 @@ class Packages:
 
     """
     def __init__(self):
-    """Initialize the Packages class"""
+        """Initialize the Packages class"""
         h = settings.get('pgsql', 'hostname')
         u = settings.get('pgsql', 'username')
         d = settings.get('pgsql', 'database')
@@ -21,16 +21,16 @@ class Packages:
         self.db = postgresql.open(url)
 
     def list(self, uid = None, system = True):
-    """Retrive a list of packages.
-    If no argument is passed only the system packages will be returned.
+        """Retrive a list of packages.
+        If no argument is passed only the system packages will be returned.
 
-    If the UID (Unix User ID) is passed as first parameter system and User
-    packages will be returned.
+        If the UID (Unix User ID) is passed as first parameter system and User
+        packages will be returned.
 
-    Arguments:
-    uid --- Add packages of a specific UNIX User ID to the returned list
-    system --- Add system packages to the returned list (default behaviour)
-    """
+        Arguments:
+        uid --- Add packages of a specific UNIX User ID to the returned list
+        system --- Add system packages to the returned list (default behaviour)
+        """
         sql = "SELECT * FROM packages"
         if all ([system, uid]):
             sql += ' WHERE owner = 0 OR owner = ' + uid
