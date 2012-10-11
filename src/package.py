@@ -2,7 +2,7 @@ import postgresql
 
 from hippocp import settings
 
-class Packages:
+class Package:
     """Class to manage the packages.
 
     Database schema:

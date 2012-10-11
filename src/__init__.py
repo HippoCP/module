@@ -1,2 +1,2 @@
-from hippocp.packages import Packages
+from hippocp.package import Package
 from hippocp import settings
