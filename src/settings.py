@@ -18,8 +18,11 @@ def get(section, option):
 def set(section, option, value):
     """Set a setting in the configuration"""
     config = configparser.RawConfigParser()
-    config.readfp(open('/etc/hippocp/hippocp.conf'))
-    cfgfile = open("/etc/hippocp/hippocp.conf",'w')
+    if os.path.exists('/etc/hippocp/hippocp.conf'):
+        config.readfp(open('/etc/hippocp/hippocp.conf'))
+    elif not os.path.exists('/etc/hippocp'):
+        os.makedirs('/etc/hippocp')
+    cfgfile = open("/etc/hippocp/hippocp.conf",'w+')
     try:
         config.set(section, option, value)
         config.write(cfgfile)
