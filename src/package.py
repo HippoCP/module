@@ -1,6 +1,6 @@
 import postgresql
 
-from hippocp import settings
+from hippocp import database
 
 class Package:
     """Class to manage the packages.
@@ -13,12 +13,7 @@ class Package:
     """
     def __init__(self):
         """Initialize the Packages class"""
-        h = settings.get('pgsql', 'hostname')
-        u = settings.get('pgsql', 'username')
-        d = settings.get('pgsql', 'database')
-        p = settings.get('pgsql', 'password')
-        url = 'pq://' + u + ':' + p + '@' + h + '/' + d
-        self.db = postgresql.open(url)
+        self.db = postgresql.open(database.getPgUrl())
 
     def list(self, uid = None, system = True):
         """Retrive a list of packages.
