@@ -6,7 +6,7 @@ from pwd import getpwnam
 
 from hippocp import database
 
-class User:
+class Users:
     """Class to manage the users.
 
     Database schema:
