@@ -20,3 +20,11 @@ class User:
         sql+= "    JOIN role_user ON role_user.user_id = " + self.id
         rows = self.db.prepare(sql)
         return rows()
+
+    def checkRole(self, role):
+        """Check if the user has a particular role"""
+        sql = "SELECT COUNT(role_id) FROM role_user"
+        sql+= "    WHERE role_id = " + role
+        sql+= "        AND user_id = " + self.id
+        rows = self.db.prepare(sql)
+        return rows()
