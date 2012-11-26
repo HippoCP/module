@@ -27,4 +27,7 @@ class User:
         sql+= "    WHERE role_id = " + role
         sql+= "        AND user_id = " + self.id
         rows = self.db.prepare(sql)
-        return rows()
+        if rows.first() is 0:
+            return False
+        else:
+            return True
