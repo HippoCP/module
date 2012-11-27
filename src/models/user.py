@@ -16,8 +16,9 @@ class User:
 
     def roles(self):
         """List all roles of the user"""
-        sql = "SELECT * FROM roles"
-        sql+= "    JOIN role_user ON role_user.user_id = " + self.id
+        sql = "SELECT roles.id, roles.name FROM roles"
+        sql+= "    JOIN role_user ON role_user.role_id = roles.id"
+        sql+= "    WHERE role_user.user_id = " + self.id
         rows = self.db.prepare(sql)
         return rows()
 
