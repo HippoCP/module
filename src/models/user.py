@@ -32,3 +32,11 @@ class User:
             return False
         else:
             return True
+
+    def addRole(self, role):
+        """Check if the user is in a role.
+        If the user has already the role True is returned.
+        If the user has not the role yet, the role is assigned and True is returned"""
+        if self.checkRole(role) is True:
+            return True
+        sql = "INSERT INTO role_user VALUES (" + role + "," + self.id + ")"
