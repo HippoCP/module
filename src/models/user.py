@@ -39,4 +39,8 @@ class User:
         If the user has not the role yet, the role is assigned and True is returned"""
         if self.checkRole(role) is True:
             return True
-        sql = "INSERT INTO role_user VALUES (" + role + "," + self.id + ")"
+        self.db.execute("INSERT INTO role_user VALUES (" + role + "," + self.id + ")")
+        if self.checkRole(role) is True:
+            return True
+        else:
+            return False
