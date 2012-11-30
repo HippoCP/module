@@ -44,3 +44,13 @@ class User:
             return True
         else:
             return False
+
+    def removeRole(self, role):
+        """Remove the role if it exists"""
+        if self.checkRole(role) is False:
+            return True
+        self.db.execute("DELETE FROM role_user WHERE role_id = " + role + " AND user_id = " + self.id)
+        if self.checkRole(role) is False:
+            return True
+        else:
+            return False
