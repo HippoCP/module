@@ -14,3 +14,9 @@ class Roles:
             return True
         else:
             return False
+
+    def list(self):
+        """List roles"""
+        sql = "SELECT * FROM roles"
+        rows = self.db.prepare(sql)
+        return rows()
