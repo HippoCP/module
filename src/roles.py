@@ -15,6 +15,10 @@ class Roles:
         else:
             return False
 
+    def remove(self, roleid):
+        """Remove the role with matching ID"""
+        self.db.execute("DELETE FROM roles WHERE id = " + roleid)
+
     def list(self):
         """List roles"""
         sql = "SELECT * FROM roles"
