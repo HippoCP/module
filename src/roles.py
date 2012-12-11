@@ -19,6 +19,17 @@ class Roles:
         """Remove the role with matching ID"""
         self.db.execute("DELETE FROM roles WHERE id = " + roleid)
 
+    def exists(self, roleid):
+        """Check if the role exists"""
+        sql = "SELECT COUNT(id) FROM roles"
+        sql+= "    WHERE id = " + roleid
+        rows = self.db.prepare(sql)
+        if rows.first() is 0:
+            return False
+        else:
+            return True
+
+
     def list(self):
         """List roles"""
         sql = "SELECT * FROM roles"
