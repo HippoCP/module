@@ -17,7 +17,11 @@ class Roles:
 
     def remove(self, roleid):
         """Remove the role with matching ID"""
+        if self.exists(roleid) is False:
+            return True
         self.db.execute("DELETE FROM roles WHERE id = " + roleid)
+        if self.exists(roleid) is False:
+            return True
 
     def exists(self, roleid):
         """Check if the role exists"""
@@ -28,7 +32,6 @@ class Roles:
             return False
         else:
             return True
-
 
     def list(self):
         """List roles"""
