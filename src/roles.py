@@ -33,6 +33,13 @@ class Roles:
         else:
             return True
 
+    def last(self, roleid):
+        """Check if the role exists"""
+        sql = "SELECT MAX(id) FROM roles"
+        sql+= "    WHERE id = " + roleid
+        rows = self.db.prepare(sql)
+        return rows.first()
+
     def list(self):
         """List roles"""
         sql = "SELECT * FROM roles"
