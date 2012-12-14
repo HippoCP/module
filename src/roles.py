@@ -10,7 +10,8 @@ class Roles:
 
     def add(self, name):
         """Add a role"""
-        if self.db.execute('INSERT INTO roles (name) VALUES (\''+name+'\')') is None:
+        next = str(self.last() + 1)
+        if self.db.execute('INSERT INTO roles (id, name) VALUES (\''+next+'\', \''+name+'\')') is None:
             return True
         else:
             return False
@@ -33,10 +34,9 @@ class Roles:
         else:
             return True
 
-    def last(self, roleid):
+    def last(self):
         """Check if the role exists"""
         sql = "SELECT MAX(id) FROM roles"
-        sql+= "    WHERE id = " + roleid
         rows = self.db.prepare(sql)
         return rows.first()
 
