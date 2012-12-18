@@ -54,3 +54,11 @@ class User:
             return True
         else:
             return False
+
+    def permissions(self):
+        """List all roles of the user"""
+        sql = "SELECT permissions.id, permissions.name FROM permissions"
+        sql+= "    JOIN permission_user ON permission_user.permission_id = permissions.id"
+        sql+= "    WHERE permission_user.user_id = " + self.id
+        rows = self.db.prepare(sql)
+        return rows()
