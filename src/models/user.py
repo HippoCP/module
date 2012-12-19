@@ -56,9 +56,20 @@ class User:
             return False
 
     def permissions(self):
-        """List all roles of the user"""
+        """List all permissions of the user"""
         sql = "SELECT permissions.id, permissions.name FROM permissions"
         sql+= "    JOIN permission_user ON permission_user.permission_id = permissions.id"
         sql+= "    WHERE permission_user.user_id = " + self.id
         rows = self.db.prepare(sql)
         return rows()
+
+    def checkPermission(self, permission):
+        """Check if the user has a particular permission"""
+        sql = "SELECT COUNT(permission_id) FROM permission_user"
+        sql+= "    WHERE permission_id = " + permission
+        sql+= "        AND permission_id = " + self.id
+        rows = self.db.prepare(sql)
+        if rows.first() is 0:
+            return False
+        else:
+            return True
