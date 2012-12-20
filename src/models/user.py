@@ -73,3 +73,15 @@ class User:
             return False
         else:
             return True
+
+    def addPermission(self, permission):
+        """Check if the user has a permission
+        If the user has already the permission True is returned.
+        If the user has not the permission yet, it is assigned and True is returned"""
+        if self.checkPermission(permission) is True:
+            return True
+        self.db.execute("INSERT INTO permission_user VALUES (" + permission + "," + self.id + ")")
+        if self.checkPermission(permission) is True:
+            return True
+        else:
+            return False
