@@ -85,3 +85,13 @@ class User:
             return True
         else:
             return False
+
+    def removePermission(self, permission):
+        """Remove the permission to this user if is granted"""
+        if self.checkPermission(permission) is False:
+            return True
+        self.db.execute("DELETE FROM permission_user WHERE permission_id = " + permission + " AND user_id = " + self.id)
+        if self.checkPermission(permission) is False:
+            return True
+        else:
+            return False
