@@ -17,3 +17,9 @@ class Permissions:
             return False
         else:
             return True
+
+    def list(self):
+        """List permissions"""
+        sql = "SELECT * FROM permissions"
+        rows = self.db.prepare(sql)
+        return rows()
