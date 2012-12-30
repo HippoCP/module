@@ -23,3 +23,10 @@ class Permissions:
         sql = "SELECT * FROM permissions"
         rows = self.db.prepare(sql)
         return rows()
+
+    def last(self):
+        """Check if the permission exists"""
+        sql = "SELECT MAX(id) FROM permissions"
+        rows = self.db.prepare(sql)
+        return rows.first()
+
