@@ -37,3 +37,11 @@ class Permissions:
             return True
         else:
             return False
+
+    def remove(self, permissionid):
+        """Remove the permission with matching ID"""
+        if self.exists(permissionid) is False:
+            return True
+        self.db.execute("DELETE FROM permissions WHERE id = " + permissionid)
+        if self.exists(permissionid) is False:
+            return True
