@@ -30,3 +30,10 @@ class Permissions:
         rows = self.db.prepare(sql)
         return rows.first()
 
+    def add(self, name):
+        """Add a permission"""
+        next = str(self.last() + 1)
+        if self.db.execute('INSERT INTO permissions (id, name) VALUES (\''+next+'\', \''+name+'\')') is None:
+            return True
+        else:
+            return False
